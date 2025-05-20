@@ -93,7 +93,7 @@ Berikut detail kebutuhan saya:
 *Layanan:* ${service}
 *Deadline:* ${deadline}
 *Budget:* ${budget || "-"}
-*Bahasa Pemograman :* ${budget || "-"}
+*Bahasa Pemograman :* ${bahasa || "-"}
 
 *Deskripsi Pekerjaan:*
 ${description.trim()}
