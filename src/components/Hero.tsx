@@ -1,11 +1,12 @@
-import React from 'react';
-import { Code, Terminal, Users } from 'lucide-react';
+import React from "react";
+import { Code, Terminal, Users } from "lucide-react";
+import { Typewriter } from "react-simple-typewriter";
 
 const Hero: React.FC = () => {
   const scrollToOrder = () => {
-    const orderSection = document.getElementById('order');
+    const orderSection = document.getElementById("order");
     if (orderSection) {
-      orderSection.scrollIntoView({ behavior: 'smooth' });
+      orderSection.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -18,20 +19,49 @@ const Hero: React.FC = () => {
               #1 Jasa Joki Coding Terpercaya
             </div>
             <h1 className="font-bold text-primary-800 animate-slide-in">
-              Solusi Tugas Coding Anda dengan <span className="text-accent-500">Tajoki</span>
+              Solusi Tugas Coding Anda dengan{" "}
+              <span className="text-accent-500">
+                <Typewriter
+                  words={["Tajoki", "joki coding"]}
+                  loop={10}
+                  cursor
+                  cursorStyle="_"
+                  typeSpeed={150}
+                  deleteSpeed={150}
+                  delaySpeed={1500}
+                />
+              </span>
             </h1>
-            <p className="text-lg text-gray-600 animate-slide-in" style={{ animationDelay: '0.1s' }}>
-              Kami membantu mahasiswa dan pelajar menyelesaikan tugas programming dengan kualitas kode terbaik, tepat waktu, dan harga bersahabat.
+            <p
+              className="text-lg text-gray-600 animate-slide-in"
+              style={{ animationDelay: "0.1s" }}
+            >
+              Kami membantu mahasiswa dan pelajar menyelesaikan tugas
+              programming dengan kualitas kode terbaik, tepat waktu, dan harga
+              bersahabat.
             </p>
-            <div className="flex flex-wrap gap-4 animate-slide-in" style={{ animationDelay: '0.2s' }}>
+            <div
+              className="flex flex-wrap gap-4 animate-slide-in"
+              style={{ animationDelay: "0.2s" }}
+            >
               <button onClick={scrollToOrder} className="btn btn-accent">
                 Pesan Sekarang
               </button>
-              <button onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })} className="btn btn-secondary">
+              <button
+                onClick={() =>
+                  document
+                    .getElementById("services")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
+                className="btn btn-secondary"
+              >
                 Lihat Layanan
               </button>
             </div>
-            <div className="flex flex-wrap gap-6 pt-4 animate-slide-in" style={{ animationDelay: '0.3s' }}>
+            <div
+              className="flex flex-wrap gap-6 pt-4 animate-slide-in"
+              style={{ animationDelay: "0.3s" }}
+            >
               <div className="flex items-center gap-2">
                 <Users size={20} className="text-primary-600" />
                 <span className="font-medium">500+ Klien Puas</span>
@@ -48,13 +78,13 @@ const Hero: React.FC = () => {
           </div>
           <div className="relative animate-float">
             <div className="relative z-10 bg-white shadow-xl rounded-2xl overflow-hidden border-8 border-white">
-              <img 
-                src="https://blog.rilidigital.com/wp-content/uploads/2024/12/Menciptakan-Berbagai-Teknologi-Melalui-Coding.jpg" 
-                alt="Programmer coding" 
+              <img
+                src="https://blog.rilidigital.com/wp-content/uploads/2024/12/Menciptakan-Berbagai-Teknologi-Melalui-Coding.jpg"
+                alt="Programmer coding"
                 className="w-full h-auto object-cover"
               />
             </div>
-            
+
             {/* Decorative elements */}
             <div className="absolute -top-6 -right-6 w-32 h-32 bg-accent-100 rounded-full z-0"></div>
             <div className="absolute -bottom-6 -left-6 w-24 h-24 bg-primary-100 rounded-full z-0"></div>
