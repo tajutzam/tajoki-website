@@ -1,5 +1,14 @@
 import React from "react";
-import { MessageSquare, Mail, Instagram, Clock, MapPin } from "lucide-react";
+import {
+  MessageSquare,
+  Mail,
+  Instagram,
+  Clock,
+  MapPin,
+  X,
+  TwitterIcon,
+  XIcon,
+} from "lucide-react";
 
 const ContactCard: React.FC<{
   icon: React.ReactNode;
@@ -65,11 +74,11 @@ const Contact: React.FC = () => {
           />
 
           <ContactCard
-            icon={<Clock size={24} />}
-            title="Jam Operasional"
-            description="Senin - Minggu: 08.00 - 22.00 WIB"
-            action="Hubungi Kami"
-            href="#order"
+            icon={<TwitterIcon size={24} />}
+            title="Twiter (X)"
+            description="Lihat lebih banyak testi di sini"
+            action="@tajoki_id"
+            href="https://x.com/tajoki_id"
           />
         </div>
 
@@ -141,7 +150,7 @@ const Contact: React.FC = () => {
             />
             <div className="absolute -bottom-6 -right-6 bg-white p-4 rounded-lg shadow-lg">
               <MapPin size={20} className="text-primary-600 inline mr-2" />
-              <span className="font-medium">Jakarta, Indonesia</span>
+              <span className="font-medium">Jawa Timur, Indonesia</span>
             </div>
           </div>
         </div>
