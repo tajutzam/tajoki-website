@@ -5,7 +5,7 @@ type TestimonialType = {
   id: number;
   name: string;
   role: string;
-  image: string;
+  image?: string;
   rating: number;
   text: string;
 };
@@ -14,39 +14,10 @@ const Testimonials: React.FC = () => {
   const testimonials: TestimonialType[] = [
     {
       id: 1,
-      name: "Anita Wijaya",
+      name: "NAD (Iniisal)",
       role: "Mahasiswa Teknik Informatika",
-      image:
-        "https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&w=600",
       rating: 5,
-      text: "Tajoki benar-benar penyelamat! Tugas akhir pemrograman Python yang rumit bisa terselesaikan dengan baik dan tepat waktu. Kode bersih dan mudah dipahami. Pasti rekomendasikan ke teman-teman!",
-    },
-    {
-      id: 2,
-      name: "Budi Santoso",
-      role: "Mahasiswa Sistem Informasi",
-      image:
-        "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=600",
-      rating: 5,
-      text: "Saya hampir menyerah dengan tugas database saya sampai menemukan Tajoki. Mereka tidak hanya membantu menyelesaikan tugas, tapi juga menjelaskan logika di balik kode. Layanan premium dengan harga mahasiswa!",
-    },
-    {
-      id: 3,
-      name: "Citra Handayani",
-      role: "Mahasiswa UI/UX Design",
-      image:
-        "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=600",
-      rating: 4,
-      text: "Awalnya ragu menggunakan jasa joki, tapi Tajoki berbeda. Proyek web development saya diselesaikan dengan kualitas yang sangat baik. Revisi juga dilayani dengan cepat. Worth it!",
-    },
-    {
-      id: 4,
-      name: "Dhika Pratama",
-      role: "Mahasiswa Teknik Elektro",
-      image:
-        "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=600",
-      rating: 5,
-      text: "Tugas pemrograman mikrokontroler yang sulit bisa selesai berkat Tajoki. Pengerjaan cepat dan hasilnya melampaui ekspektasi saya. Dosen saya sangat terkesan dengan kualitas kode yang diberikan!",
+      text: "trusted abiezzzz⭐️⭐️⭐️⭐️ cepet juga ngerjainnyaa makanya balik lagi😁🤩",
     },
   ];
 
@@ -116,11 +87,17 @@ const Testimonials: React.FC = () => {
                 >
                   <div className="mx-10 card text-gray-800 p-6 md:p-8">
                     <div className="flex flex-wrap gap-4 items-center mb-4">
-                      <img
-                        src={testimonial.image}
-                        alt={testimonial.name}
-                        className="w-14 h-14 object-cover rounded-full"
-                      />
+                      {testimonial.image ? (
+                        <img
+                          src={testimonial.image}
+                          alt={testimonial.name}
+                          className="w-14 h-14 object-cover rounded-full"
+                        />
+                      ) : (
+                        <div className="w-14 h-14 rounded-full bg-primary-700 text-white flex items-center justify-center font-bold text-lg">
+                          {testimonial.name.charAt(0).toUpperCase()}
+                        </div>
+                      )}
                       <div>
                         <div className="font-medium text-lg">
                           {testimonial.name}

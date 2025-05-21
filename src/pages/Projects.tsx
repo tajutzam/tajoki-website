@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import loadingAnimation from "../jsons/maintaince.json";
+import Lottie from "lottie-react";
+import Maintaince from "../components/Maintaince";
+
+type ProjectsProps = {
+  isUnderMaintenance?: boolean;
+};
 
 type Technology = {
   name: string;
@@ -17,7 +24,7 @@ type Project = {
   category: string;
 };
 
-const Projects: React.FC = () => {
+const Projects: React.FC<ProjectsProps> = ({ isUnderMaintenance = false }) => {
   const projects: Project[] = [
     {
       id: 1,
@@ -110,61 +117,67 @@ const Projects: React.FC = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-          {projects.map((project) => (
-            <motion.div
-              key={project.id}
-              className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: project.id * 0.1 }}
-              viewport={{ once: true }}
-            >
-              <div className="relative h-56 overflow-hidden rounded-t-2xl">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                />
-                <span className="absolute top-4 right-4 bg-white text-sm text-gray-800 px-3 py-1 rounded-full shadow-sm font-medium">
-                  {project.category}
-                </span>
-              </div>
-
-              <div className="p-6">
-                <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                  {project.title}
-                </h3>
-                <p className="text-gray-600 text-sm mb-4 leading-relaxed">
-                  {project.description}
-                </p>
-
-                <div className="flex flex-wrap gap-2 mb-5">
-                  {project.technologies.map((tech, index) => (
-                    <span
-                      key={index}
-                      className={`px-3 py-1 text-xs font-medium text-white rounded-full ${tech.color}`}
-                    >
-                      {tech.name}
+        <div className="">
+          {isUnderMaintenance ? (
+            <Maintaince />
+          ) : (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {projects.map((project) => (
+                <motion.div
+                  key={project.id}
+                  className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: project.id * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <div className="relative h-56 overflow-hidden rounded-t-2xl">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                    />
+                    <span className="absolute top-4 right-4 bg-white text-sm text-gray-800 px-3 py-1 rounded-full shadow-sm font-medium">
+                      {project.category}
                     </span>
-                  ))}
-                </div>
+                  </div>
 
-                <div className="flex items-center justify-between mt-4">
-                  <span className="text-lg font-semibold text-primary-600">
-                    {project.price}
-                  </span>
-                  <button
-                    onClick={() => openModal(project)}
-                    className="inline-flex items-center gap-2 text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 px-4 py-2 rounded-full transition-colors duration-300"
-                  >
-                    Pesan Sekarang
-                    <ArrowRight size={16} />
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+                  <div className="p-6">
+                    <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                      {project.title}
+                    </h3>
+                    <p className="text-gray-600 text-sm mb-4 leading-relaxed">
+                      {project.description}
+                    </p>
+
+                    <div className="flex flex-wrap gap-2 mb-5">
+                      {project.technologies.map((tech, index) => (
+                        <span
+                          key={index}
+                          className={`px-3 py-1 text-xs font-medium text-white rounded-full ${tech.color}`}
+                        >
+                          {tech.name}
+                        </span>
+                      ))}
+                    </div>
+
+                    <div className="flex items-center justify-between mt-4">
+                      <span className="text-lg font-semibold text-primary-600">
+                        {project.price}
+                      </span>
+                      <button
+                        onClick={() => openModal(project)}
+                        className="inline-flex items-center gap-2 text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 px-4 py-2 rounded-full transition-colors duration-300"
+                      >
+                        Pesan Sekarang
+                        <ArrowRight size={16} />
+                      </button>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 

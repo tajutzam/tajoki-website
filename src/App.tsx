@@ -8,8 +8,7 @@ import "aos/dist/aos.css";
 import { useEffect } from "react";
 import Home from "./pages/Home";
 import Projects from "./pages/Projects";
-
-
+import Tracking from "./pages/Tracking";
 
 function App() {
   useEffect(() => {
@@ -26,8 +25,14 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/projects" element={<Projects />} />
-
+            <Route
+              path="/projects"
+              element={<Projects isUnderMaintenance={true} />}
+            />
+            <Route
+              path="/tracking"
+              element={<Tracking isUnderMaintaince={true} />}
+            />
           </Routes>
         </main>
         <Footer />
