@@ -117,6 +117,17 @@ const Navbar: React.FC = () => {
             Project Siap Pakai
           </Link>
           <Link
+            to="/tracking"
+            className={`font-medium text-lg transition-colors ${
+              isActive("/tracking")
+                ? "text-primary-600 font-semibold"
+                : "text-gray-700 hover:text-primary-600"
+            }`}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Tracking Order
+          </Link>
+          <Link
             to="/#order"
             className="btn btn-primary"
             onClick={() => setIsMenuOpen(false)}
@@ -206,6 +217,17 @@ const Navbar: React.FC = () => {
               onClick={() => setIsMenuOpen(false)}
             >
               Project Siap Pakai
+            </Link>
+            <Link
+              to="/tracking"
+              className={`font-medium text-lg transition-colors ${
+                isActive("/tracking")
+                  ? "text-primary-600 font-semibold"
+                  : "text-gray-700 hover:text-primary-600"
+              }`}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Tracking Order
             </Link>
             <Link
               to="/#order"
