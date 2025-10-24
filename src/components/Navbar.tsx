@@ -1,245 +1,149 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Code2, Menu, X } from "lucide-react";
 
-const Navbar: React.FC = () => {
+interface NavbarProps {
+  currentSection?: string;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ currentSection = "hero" }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const location = useLocation();
+  const [activeSection, setActiveSection] = useState(currentSection);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 30);
+      setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    if (location.hash) {
-      const id = location.hash.replace("#", "");
-      const element = document.getElementById(id);
-      if (element) {
-        setTimeout(() => {
-          element.scrollIntoView({ behavior: "smooth" });
-        }, 100);
-      }
-      setIsMenuOpen(false);
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+      setActiveSection(sectionId);
     }
-  }, [location]);
-
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-
-  // Fungsi untuk cek active menu
-  const isActive = (path: string) => {
-    // Jika link mengarah ke route spesifik tanpa hash
-    if (!path.includes("#")) {
-      return location.pathname === path;
-    }
-    // Jika link menggunakan hash, cek apakah pathname sama dan hash sama
-    const [basePath, hash] = path.split("#");
-    return (
-      location.pathname === basePath &&
-      location.hash.toLowerCase() === `#${hash.toLowerCase()}`
-    );
+    setIsMenuOpen(false);
   };
 
+  const navItems = [
+    { id: "hero", label: "Home" },
+    { id: "services", label: "Services" },
+    { id: "testimonials", label: "Testimonials" },
+    { id: "faq", label: "FAQ" },
+  ];
+
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white shadow-md py-3" : "bg-transparent py-5"
-      }`}
-    >
-      <div className="container flex items-center justify-between">
-        <Link
-          to="/#hero"
-          className="flex items-center gap-2 text-primary-800 font-heading font-bold text-xl"
-          onClick={() => setIsMenuOpen(false)}
-        >
-          <Code2 size={28} className="text-primary-600" />
-          <span>Tajoki</span>
-        </Link>
-
-        <nav className="hidden md:flex items-center space-x-8">
-          <Link
-            to="/#hero"
-            className={`font-medium transition-colors ${
-              isActive("/#hero")
-                ? "text-primary-600 font-semibold"
-                : "text-gray-700 hover:text-primary-600"
-            }`}
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Beranda
-          </Link>
-          <Link
-            to="/#services"
-            className={`font-medium transition-colors ${
-              isActive("/#services")
-                ? "text-primary-600 font-semibold"
-                : "text-gray-700 hover:text-primary-600"
-            }`}
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Layanan
-          </Link>
-          <Link
-            to="/#testimonials"
-            className={`font-medium transition-colors ${
-              isActive("/#testimonials")
-                ? "text-primary-600 font-semibold"
-                : "text-gray-700 hover:text-primary-600"
-            }`}
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Testimoni
-          </Link>
-          <Link
-            to="/#faq"
-            className={`font-medium transition-colors ${
-              isActive("/#faq")
-                ? "text-primary-600 font-semibold"
-                : "text-gray-700 hover:text-primary-600"
-            }`}
-            onClick={() => setIsMenuOpen(false)}
-          >
-            FAQ
-          </Link>
-          <Link
-            to="/projects"
-            className={`font-medium transition-colors ${
-              isActive("/projects")
-                ? "text-primary-600 font-semibold"
-                : "text-gray-700 hover:text-primary-600"
-            }`}
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Project Siap Pakai
-          </Link>
-          <Link
-            to="/tracking"
-            className={`font-medium text-lg transition-colors ${
-              isActive("/tracking")
-                ? "text-primary-600 font-semibold"
-                : "text-gray-700 hover:text-primary-600"
-            }`}
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Tracking Order
-          </Link>
-          <Link
-            to="/#order"
-            className="btn btn-primary"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Pesan Sekarang
-          </Link>
-        </nav>
-
-        <button className="md:hidden text-gray-700" onClick={toggleMenu}>
-          <Menu size={24} />
-        </button>
-      </div>
-
-      {/* Mobile Menu */}
-      <div
-        className={`fixed inset-0 bg-white z-50 transform transition-transform duration-300 ${
-          isMenuOpen ? "translate-x-0" : "translate-x-full"
-        } md:hidden`}
+    <>
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
+            ? "bg-white/80 backdrop-blur-md border-b border-gray-200/50"
+            : "bg-transparent"
+          }`}
       >
-        <div className="container py-5">
-          <div className="flex justify-between items-center mb-10">
-            <Link
-              to="/#hero"
-              className="flex items-center gap-2 text-primary-800 font-heading font-bold text-xl"
-              onClick={() => setIsMenuOpen(false)}
+        <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+          {/* Logo */}
+          <button
+            onClick={() => scrollToSection("hero")}
+            className="text-xl font-semibold text-gray-900 hover:text-blue-600 transition-colors"
+          >
+            Tajoki
+          </button>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-1">
+            {navItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
+                className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${activeSection === item.id
+                    ? "text-gray-900 bg-gray-100"
+                    : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                  }`}
+              >
+                {item.label}
+              </button>
+            ))}
+
+            <div className="w-px h-6 bg-gray-200 mx-2" />
+
+            <button
+              onClick={() => scrollToSection("order")}
+              className="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors ml-2"
             >
-              <Code2 size={28} className="text-primary-600" />
-              <span>Tajoki</span>
-            </Link>
-            <button onClick={toggleMenu}>
-              <X size={24} className="text-gray-700" />
+              Order Now
             </button>
           </div>
 
-          <div className="flex flex-col space-y-6">
-            <Link
-              to="/#hero"
-              className={`font-medium text-lg transition-colors ${
-                isActive("/#hero")
-                  ? "text-primary-600 font-semibold"
-                  : "text-gray-700 hover:text-primary-600"
-              }`}
-              onClick={() => setIsMenuOpen(false)}
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="md:hidden w-10 h-10 flex items-center justify-center text-gray-600 hover:text-gray-900 transition-colors"
+            aria-label="Toggle menu"
+          >
+            {isMenuOpen ? (
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            ) : (
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            )}
+          </button>
+        </nav>
+      </header>
+
+      {/* Mobile Menu */}
+      <div
+        className={`fixed inset-0 z-40 md:hidden transition-all duration-300 ${isMenuOpen
+            ? "pointer-events-auto"
+            : "pointer-events-none"
+          }`}
+      >
+        {/* Backdrop */}
+        <div
+          className={`absolute inset-0 bg-black/20 backdrop-blur-sm transition-opacity duration-300 ${isMenuOpen ? "opacity-100" : "opacity-0"
+            }`}
+          onClick={() => setIsMenuOpen(false)}
+        />
+
+        {/* Menu Panel */}
+        <div
+          className={`absolute top-16 left-4 right-4 bg-white rounded-2xl shadow-xl border border-gray-200 transition-all duration-300 ${isMenuOpen
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 -translate-y-4"
+            }`}
+        >
+          <div className="p-2">
+            {navItems.map((item, index) => (
+              <button
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
+                className={`w-full px-4 py-3 text-left text-sm font-medium rounded-lg transition-colors ${activeSection === item.id
+                    ? "text-gray-900 bg-gray-100"
+                    : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                  } ${index !== navItems.length - 1 ? "mb-1" : ""}`}
+              >
+                {item.label}
+              </button>
+            ))}
+
+            <div className="h-px bg-gray-200 my-2" />
+
+            <button
+              onClick={() => scrollToSection("order")}
+              className="w-full px-4 py-3 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors"
             >
-              Beranda
-            </Link>
-            <Link
-              to="/#services"
-              className={`font-medium text-lg transition-colors ${
-                isActive("/#services")
-                  ? "text-primary-600 font-semibold"
-                  : "text-gray-700 hover:text-primary-600"
-              }`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Layanan
-            </Link>
-            <Link
-              to="/#testimonials"
-              className={`font-medium text-lg transition-colors ${
-                isActive("/#testimonials")
-                  ? "text-primary-600 font-semibold"
-                  : "text-gray-700 hover:text-primary-600"
-              }`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Testimoni
-            </Link>
-            <Link
-              to="/#faq"
-              className={`font-medium text-lg transition-colors ${
-                isActive("/#faq")
-                  ? "text-primary-600 font-semibold"
-                  : "text-gray-700 hover:text-primary-600"
-              }`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              FAQ
-            </Link>
-            <Link
-              to="/projects"
-              className={`font-medium text-lg transition-colors ${
-                isActive("/projects")
-                  ? "text-primary-600 font-semibold"
-                  : "text-gray-700 hover:text-primary-600"
-              }`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Project Siap Pakai
-            </Link>
-            <Link
-              to="/tracking"
-              className={`font-medium text-lg transition-colors ${
-                isActive("/tracking")
-                  ? "text-primary-600 font-semibold"
-                  : "text-gray-700 hover:text-primary-600"
-              }`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Tracking Order
-            </Link>
-            <Link
-              to="/#order"
-              className="btn btn-primary w-full"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Pesan Sekarang
-            </Link>
+              Order Now
+            </button>
           </div>
         </div>
       </div>
-    </header>
+
+      {/* Spacer */}
+      <div className="h-16" />
+    </>
   );
 };
 
