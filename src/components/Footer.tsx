@@ -20,7 +20,7 @@ const Footer: React.FC = () => {
             </p>
             <div className="flex gap-3 pt-2">
               <a
-                href="https://instagram.com/tajoki.id"
+                href="https://instagram.com/tajoki_id"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-primary-800 flex items-center justify-center hover:bg-primary-700 transition-colors"
@@ -28,7 +28,7 @@ const Footer: React.FC = () => {
                 <Instagram size={18} />
               </a>
               <a
-                href="https://wa.me/6281234567890"
+                href="https://wa.me/6285175286933"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-primary-800 flex items-center justify-center hover:bg-primary-700 transition-colors"
@@ -36,7 +36,7 @@ const Footer: React.FC = () => {
                 <MessageSquare size={18} />
               </a>
               <a
-                href="mailto:tajoki.id@gmail.com"
+                href="mailto:mohammadtajutzamzami07@gmail.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-primary-800 flex items-center justify-center hover:bg-primary-700 transition-colors"
@@ -188,12 +188,12 @@ const Footer: React.FC = () => {
                 />
                 <span className="text-primary-200">
                   <a
-                    href="https://wa.me/62851752869330"
+                    href="https://wa.me/6285175286933"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hover:text-white transition-colors"
                   >
-                    +62 812-3456-7890
+                    +6285175286933
                   </a>
                 </span>
               </li>
@@ -204,12 +204,12 @@ const Footer: React.FC = () => {
                 />
                 <span className="text-primary-200">
                   <a
-                    href="mailto:tajoki.id@gmail.com"
+                    href="mailto:mohammadtajutzamzami07@gmail.com"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hover:text-white transition-colors"
                   >
-                    tajoki.id@gmail.com
+                    mohammadtajutzamzami07@gmail.com
                   </a>
                 </span>
               </li>
@@ -225,7 +225,7 @@ const Footer: React.FC = () => {
                     rel="noopener noreferrer"
                     className="hover:text-white transition-colors"
                   >
-                    @tajoki.id
+                    @tajoki_id
                   </a>
                 </span>
               </li>
