@@ -18,27 +18,35 @@ const Navbar: React.FC<NavbarProps> = ({ currentSection = "hero" }) => {
   }, []);
 
   const scrollToSection = (sectionId: string) => {
+    if (window.location.pathname !== "/") {
+      window.location.href = `/#${sectionId}`;
+      return;
+    }
+
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
       setActiveSection(sectionId);
     }
+
     setIsMenuOpen(false);
   };
+
 
   const navItems = [
     { id: "hero", label: "Home" },
     { id: "services", label: "Services" },
     { id: "testimonials", label: "Testimonials" },
     { id: "faq", label: "FAQ" },
+    { id: "projects", label: "Buy Projects" },
   ];
 
   return (
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-            ? "bg-white/80 backdrop-blur-md border-b border-gray-200/50"
-            : "bg-transparent"
+          ? "bg-white/80 backdrop-blur-md border-b border-gray-200/50"
+          : "bg-transparent"
           }`}
       >
         <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
@@ -47,23 +55,34 @@ const Navbar: React.FC<NavbarProps> = ({ currentSection = "hero" }) => {
             onClick={() => scrollToSection("hero")}
             className="text-xl font-semibold text-gray-900 hover:text-blue-600 transition-colors"
           >
-            Tajoki
+            <img src="/logo.png" alt="Tajoki Logo" className="h-14" />
           </button>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-1">
             {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${activeSection === item.id
+              item.id === "projects" ? (
+                <button
+                  key={item.id}
+                  onClick={() => window.location.href = "/projects"}
+                  className="px-4 py-2 text-sm font-medium rounded-lg transition-colors text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                >
+                  {item.label}
+                </button>
+              ) : (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${activeSection === item.id
                     ? "text-gray-900 bg-gray-100"
                     : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
-                  }`}
-              >
-                {item.label}
-              </button>
+                    }`}
+                >
+                  {item.label}
+                </button>
+              )
             ))}
+
 
             <div className="w-px h-6 bg-gray-200 mx-2" />
 
@@ -97,8 +116,8 @@ const Navbar: React.FC<NavbarProps> = ({ currentSection = "hero" }) => {
       {/* Mobile Menu */}
       <div
         className={`fixed inset-0 z-40 md:hidden transition-all duration-300 ${isMenuOpen
-            ? "pointer-events-auto"
-            : "pointer-events-none"
+          ? "pointer-events-auto"
+          : "pointer-events-none"
           }`}
       >
         {/* Backdrop */}
@@ -111,23 +130,28 @@ const Navbar: React.FC<NavbarProps> = ({ currentSection = "hero" }) => {
         {/* Menu Panel */}
         <div
           className={`absolute top-16 left-4 right-4 bg-white rounded-2xl shadow-xl border border-gray-200 transition-all duration-300 ${isMenuOpen
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 -translate-y-4"
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 -translate-y-4"
             }`}
         >
           <div className="p-2">
             {navItems.map((item, index) => (
               <button
                 key={item.id}
-                onClick={() => scrollToSection(item.id)}
+                onClick={() =>
+                  item.id === "projects"
+                    ? (window.location.href = "/projects")
+                    : scrollToSection(item.id)
+                }
                 className={`w-full px-4 py-3 text-left text-sm font-medium rounded-lg transition-colors ${activeSection === item.id
-                    ? "text-gray-900 bg-gray-100"
-                    : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                  ? "text-gray-900 bg-gray-100"
+                  : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
                   } ${index !== navItems.length - 1 ? "mb-1" : ""}`}
               >
                 {item.label}
               </button>
             ))}
+
 
             <div className="h-px bg-gray-200 my-2" />
 
