@@ -27,7 +27,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route
               path="/projects"
-              element={<Projects isUnderMaintenance={false} />}
+              element={<Projects />}
             />
             <Route
               path="/tracking"
